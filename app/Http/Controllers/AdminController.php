@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -45,5 +46,48 @@ class AdminController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
         return redirect()->back();
+    }
+
+    public function addsupplier()
+    {
+        return view('admin.addsupplier');
+    }
+
+    public function postaddsupplier(Request $request)
+    {
+        $supplier = new Supplier();
+        $supplier->supplier_name = $request->supplier_name;
+        $supplier->supplier_phone = $request->phone;
+        $supplier->supplier_address = $request->supplier_address;
+        $supplier->save();
+        return redirect()->back()->with('supplier_message', 'supplier added successfully');
+    }
+
+    public function viewSupplier()
+    {
+        $suppliers = Supplier::all();
+        return view('admin.viewsupplier', compact('suppliers'));
+    }
+    public function deletesupplier($id)
+    {
+        $suppliers = Supplier::findOrFail($id);
+        $suppliers->delete();
+        return redirect()->back();
+    }
+
+    public function updatesupplier($id)
+    {
+        $suppliers = Supplier::findOrFail($id);
+        return view('admin.updatesupplier', compact('suppliers'));
+    }
+
+    public function postupdatesupplier(Request $request, $id)
+    {
+        $suppliers = Supplier::findOrFail($id);
+        $suppliers->supplier_name = $request->supplier_name;
+        $suppliers->supplier_phone = $request->supplier_phone;
+        $suppliers->supplier_address = $request->supplier_address;
+        $suppliers->save();
+        return redirect()->back()->with('update_message', 'Data updated successfully');
     }
 }

@@ -22,6 +22,12 @@
                     <x-nav-link :href="route('admin.viewcategory')" :active="request()->routeIs('admin.viewcategory')">
                         {{ __('ViewCategory') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.addsupplier')" :active="request()->routeIs('admin.addsupplier')">
+                        {{ __('AddSupplier') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.viewsupplier')" :active="request()->routeIs('admin.viewsupplier')">
+                        {{ __('ViewSupplier') }}
+                    </x-nav-link>
                     @endif
                 </div>
             </div>
