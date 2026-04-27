@@ -15,6 +15,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if(Auth::check() && Auth::user()->type=='admin')
+                    <x-nav-link :href="route('admin.addcategory')" :active="request()->routeIs('admin.addcategory')">
+                        {{ __('AddCategory') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.viewcategory')" :active="request()->routeIs('admin.viewcategory')">
+                        {{ __('ViewCategory') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -43,7 +51,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -89,7 +97,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                        onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
