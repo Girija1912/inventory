@@ -7,32 +7,43 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @if(session('supplier_message'))
+            @if(session('success'))
             <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
-                {{session('supplier_message')}}
+                {{session('success')}}
             </div>
             @endif
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <form action="{{ route('admin.postaddproduct') }}" method="POST"
-                        style="max-width:500px; margin:auto;" enctype="multipart/form-data">
+                        enctype="multipart/form-data"
+                        style="max-width:500px; margin:40px auto; padding:20px; border:1px solid #ddd; border-radius:10px; box-shadow:0 0 10px #eee; font-family:Arial;">
+
                         @csrf
+
+                        <!-- Image -->
+                        <label style="font-weight:bold;">Product Image</label>
                         <input type="file" name="product_image"
-                            style="margin-bottom:10px;">
+                            style="width:100%; padding:8px; margin-bottom:12px; border:1px solid #ccc; border-radius:6px;">
 
+                        <!-- Product Name -->
+                        <label style="font-weight:bold;">Product Name</label>
                         <input type="text" name="product_name" placeholder="Enter Product Name" required
-                            style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:6px;">
+                            style="width:100%; padding:10px; margin-bottom:12px; border:1px solid #ccc; border-radius:6px;">
 
+                        <!-- Quantity -->
+                        <label style="font-weight:bold;">Quantity</label>
                         <input type="number" name="product_quantity" min="1" placeholder="Enter Quantity" required
-                            style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:6px;">
+                            style="width:100%; padding:10px; margin-bottom:12px; border:1px solid #ccc; border-radius:6px;">
 
+                        <!-- Price -->
+                        <label style="font-weight:bold;">Price</label>
                         <input type="number" name="product_price" placeholder="Enter Product Price" required
-                            style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:6px;">
+                            style="width:100%; padding:10px; margin-bottom:12px; border:1px solid #ccc; border-radius:6px;">
 
                         <!-- Category -->
-                        <label>Category</label>
-                        <select name="category_id"
-                            style="width:100%; padding:10px; margin-bottom:10px; border-radius:6px;">
+                        <label style="font-weight:bold;">Category</label>
+                        <select name="category_name" required
+                            style="width:100%; padding:10px; margin-bottom:12px; border:1px solid #ccc; border-radius:6px; background:white;">
                             <option value="">Select Category</option>
                             @foreach($categories as $category)
                             <option value="{{ $category->category_name }}">
@@ -42,9 +53,9 @@
                         </select>
 
                         <!-- Supplier -->
-                        <label>Supplier</label>
-                        <select name="supplier_id"
-                            style="width:100%; padding:10px; margin-bottom:10px; border-radius:6px;">
+                        <label style="font-weight:bold;">Supplier</label>
+                        <select name="supplier_name" required
+                            style="width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:6px; background:white;">
                             <option value="">Select Supplier</option>
                             @foreach($suppliers as $supplier)
                             <option value="{{ $supplier->supplier_name }}">
@@ -53,8 +64,12 @@
                             @endforeach
                         </select>
 
+                        <!-- Submit -->
                         <input type="submit" value="Add Product"
-                            style="width:100%; padding:10px; background:#28a745; color:white; border:none; border-radius:6px;">
+                            style="width:100%; padding:12px; background:#28a745; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer; transition:0.3s;"
+                            onmouseover="this.style.background='#218838'"
+                            onmouseout="this.style.background='#28a745'">
+
                     </form>
                 </div>
             </div>

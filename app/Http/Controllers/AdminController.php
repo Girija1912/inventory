@@ -101,15 +101,23 @@ class AdminController extends Controller
 
     public function postaddproduct(Request $request)
     {
-        $categories = Category::all();
-        $suppliers = Supplier::all();
+
         $product = new Product();
+        $image = $request->product_image;
+        if ($image) {
+            $imagename = time() . "." . $image->getClientOriginalExtension();
+
+            $product->product_image = $imagename;
+        }
         $product->product_name = $request->product_name;
         $product->product_quantity = $request->product_quantity;
         $product->product_price = $request->product_price;
-        $product->category_id = $request->category_id;
-        $product->supplier_id = $request->supplier_id;
+        $product->category_name = $request->category_name;
+        $product->supplier_name = $request->supplier_name;
         $product->save();
+        if ($image && $product->save()) {
+            $request->product_image->move("products", $imagename);
+        }
 
         return redirect()->back()->with('success', 'Product added successfully');
     }
