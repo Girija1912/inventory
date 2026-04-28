@@ -17,7 +17,7 @@
                     <form action="{{route('admin.postaddcategory')}}" method="post">
                         @csrf
                         <input type="text" name="category_name" placeholder="Enter Category Name" required />
-                        <input style="background-color: blue;padding:10px;border:1px solid black; border-radius:10px; color:white;" type="submit" name="submit" value="Add Category" />
+                        <input style="background-color: blue;padding:10px;border:1px solid black; border-radius:10px; color:white;" type="submit" name="submit" value="Update Category" />
                     </form>
                 </div>
             </div>

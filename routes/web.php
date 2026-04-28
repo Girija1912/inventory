@@ -24,6 +24,8 @@ Route::middleware('admin', 'verified')->group(function () {
     Route::get('/deletesupplier/{id}', [AdminController::class, 'deletesupplier'])->name('admin.deletesupplier');
     Route::get('/updatesupplier/{id}', [AdminController::class, 'updatesupplier'])->name('admin.updatesupplier');
     Route::post('/postupdatesupplier/{id}', [AdminController::class, 'postupdatesupplier'])->name('admin.postupdatesupplier');
+    route::get('/addproducts', [AdminController::class, 'addproducts'])->name('admin.addproducts');
+    Route::post('/postaddproduct', [AdminController::class, 'postaddproduct'])->name('admin.postaddproduct');
 });
 
 Route::middleware('auth')->group(function () {

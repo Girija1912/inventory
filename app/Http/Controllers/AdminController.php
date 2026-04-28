@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Supplier;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -57,7 +58,7 @@ class AdminController extends Controller
     {
         $supplier = new Supplier();
         $supplier->supplier_name = $request->supplier_name;
-        $supplier->supplier_phone = $request->phone;
+        $supplier->supplier_phone = $request->supplier_phone;
         $supplier->supplier_address = $request->supplier_address;
         $supplier->save();
         return redirect()->back()->with('supplier_message', 'supplier added successfully');
@@ -89,5 +90,27 @@ class AdminController extends Controller
         $suppliers->supplier_address = $request->supplier_address;
         $suppliers->save();
         return redirect()->back()->with('update_message', 'Data updated successfully');
+    }
+
+    public function addproducts()
+    {
+        $categories = Category::all();
+        $suppliers = Supplier::all();
+        return view('admin.addproducts', compact('categories', 'suppliers'));
+    }
+
+    public function postaddproduct(Request $request)
+    {
+        $categories = Category::all();
+        $suppliers = Supplier::all();
+        $product = new Product();
+        $product->product_name = $request->product_name;
+        $product->product_quantity = $request->product_quantity;
+        $product->product_price = $request->product_price;
+        $product->category_id = $request->category_id;
+        $product->supplier_id = $request->supplier_id;
+        $product->save();
+
+        return redirect()->back()->with('success', 'Product added successfully');
     }
 }

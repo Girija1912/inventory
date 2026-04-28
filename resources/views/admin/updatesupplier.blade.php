@@ -24,9 +24,9 @@
                             style="width:100%; padding:10px; margin-bottom:10px; border-radius:6px; border:1px solid #ccc;">
 
                         <textarea name="supplier_address" value="{{$suppliers->supplier_address}}"
-                            style="width:100%; padding:10px; margin-bottom:10px; border-radius:6px; border:1px solid #ccc;"></textarea>
+                            style="width:100%; padding:10px; margin-bottom:10px; border-radius:6px; border:1px solid #ccc;">{{$suppliers->supplier_address}}</textarea>
 
-                        <input type="submit" value="Add Supplier"
+                        <input type="submit" value="Update Supplier"
                             style="width:100%; padding:10px; background:#28a745; color:white; border:none; border-radius:6px; cursor:pointer;">
                     </form>
                 </div>

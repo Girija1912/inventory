@@ -30,7 +30,7 @@
                                 </td>
 
                                 <td style="padding:10px; border:1px solid #ddd;">
-                                    {{ $category->Category_name }}
+                                    {{ $category->category_name }}
                                 </td>
 
                                 <td style="padding:10px; border:1px solid #ddd;">
