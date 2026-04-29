@@ -33,6 +33,7 @@ Route::middleware('admin', 'verified')->group(function () {
     Route::get('/order', [AdminController::class, 'order'])->name('admin.order');
     Route::post('/postorder/{id}', [AdminController::class, 'postorder'])->name('admin.postorder');
     Route::post('/updatequantity/{id}', [AdminController::class, 'updatequantity'])->name('admin.updatequantity');
+    Route::get('/removeorder/{id}', [AdminController::class, 'removeorder'])->name('admin.removeorder');
 });
 
 Route::middleware('auth')->group(function () {

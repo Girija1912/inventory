@@ -231,4 +231,11 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
+
+    public function removeorder($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->delete();
+        return redirect()->back();
+    }
 }

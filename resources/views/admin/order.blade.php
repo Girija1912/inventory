@@ -21,11 +21,12 @@
                     <th>Qty</th>
                     <th>Price</th>
                     <th>Total</th>
+                    <th>Action</th>
                 </tr>
             </thead>
 
             <tbody>
-                @forelse($orders as $order)
+                @foreach($orders as $order)
 
                 @php
                 $price = optional($order->product)->product_price ?? 0;
@@ -54,15 +55,15 @@
                     <td class="total" style="color:green; font-weight:bold;">
                         ₹{{ $total }}
                     </td>
-                </tr>
 
-                @empty
-                <tr>
-                    <td colspan="5" style="text-align:center; color:red;">
-                        No Orders Found
+
+
+
+                    <td colspan="5" style="text-align:center; ">
+                        <a href="{{route('admin.removeorder',$order->id)}}" style="color:white; background-color:#007bff; padding:10px">Remove</a>
                     </td>
                 </tr>
-                @endforelse
+                @endforeach
             </tbody>
 
         </table>
