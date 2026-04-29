@@ -26,6 +26,10 @@ Route::middleware('admin', 'verified')->group(function () {
     Route::post('/postupdatesupplier/{id}', [AdminController::class, 'postupdatesupplier'])->name('admin.postupdatesupplier');
     route::get('/addproducts', [AdminController::class, 'addproducts'])->name('admin.addproducts');
     Route::post('/postaddproduct', [AdminController::class, 'postaddproduct'])->name('admin.postaddproduct');
+    Route::get('/viewproducts', [AdminController::class, 'viewproducts'])->name('admin.viewproducts');
+    Route::get('/deleteproduct/{id}', [AdminController::class, 'deleteproduct'])->name('admin.deleteproduct');
+    Route::get('/updateproduct/{id}', [AdminController::class, 'updateproduct'])->name('admin.updateproduct');
+    Route::post('/postupdateproduct/{id}', [AdminController::class, 'postupdateproduct'])->name('admin.postupdateproduct');
 });
 
 Route::middleware('auth')->group(function () {

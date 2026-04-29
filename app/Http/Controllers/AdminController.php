@@ -110,6 +110,7 @@ class AdminController extends Controller
             $product->product_image = $imagename;
         }
         $product->product_name = $request->product_name;
+        $product->product_description = $request->product_description;
         $product->product_quantity = $request->product_quantity;
         $product->product_price = $request->product_price;
         $product->category_name = $request->category_name;
@@ -120,5 +121,62 @@ class AdminController extends Controller
         }
 
         return redirect()->back()->with('success', 'Product added successfully');
+    }
+
+    public function viewproducts()
+    {
+        $products = Product::all();
+        return view('admin.viewproducts', compact('products'));
+    }
+
+    public function deleteproduct($id)
+    {
+        $products = Product::findOrFail($id);
+        $products->delete();
+        return redirect()->back();
+    }
+
+    public function updateproduct($id)
+    {
+        $categories = Category::all();
+        $suppliers = Supplier::all();
+        $product = Product::findOrFail($id);
+        return view('admin.updateproduct', compact('product', 'categories', 'suppliers'));
+    }
+
+    public function postupdateproduct(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+
+
+
+
+        if ($request->hasFile('product_image')) {
+
+            // delete old image
+            if ($product->product_image && file_exists(public_path('products/' . $product->product_image))) {
+                unlink(public_path('products/' . $product->product_image));
+            }
+
+            // upload new image
+            $image = $request->file('product_image');
+            $imagename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('products'), $imagename);
+
+            $product->product_image = $imagename;
+        }
+
+
+        $product->product_name = $request->product_name;
+        $product->product_description = $request->product_description;
+        $product->product_quantity = $request->product_quantity;
+        $product->product_price = $request->product_price;
+        $product->category_name = $request->category_name;
+        $product->supplier_name = $request->supplier_name;
+
+
+        $product->save();
+
+        return redirect()->back()->with('updated_message', 'Product updated successfully');
     }
 }
