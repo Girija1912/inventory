@@ -34,6 +34,9 @@
                     <x-nav-link :href="route('admin.viewproducts')" :active="request()->routeIs('admin.viewproducts')">
                         {{ __('ViewProducts') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.order')" :active="request()->routeIs('admin.order')">
+                        {{ __('Order') }}
+                    </x-nav-link>
                     @endif
                 </div>
             </div>

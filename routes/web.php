@@ -30,6 +30,9 @@ Route::middleware('admin', 'verified')->group(function () {
     Route::get('/deleteproduct/{id}', [AdminController::class, 'deleteproduct'])->name('admin.deleteproduct');
     Route::get('/updateproduct/{id}', [AdminController::class, 'updateproduct'])->name('admin.updateproduct');
     Route::post('/postupdateproduct/{id}', [AdminController::class, 'postupdateproduct'])->name('admin.postupdateproduct');
+    Route::get('/order', [AdminController::class, 'order'])->name('admin.order');
+    Route::post('/postorder/{id}', [AdminController::class, 'postorder'])->name('admin.postorder');
+    Route::post('/updatequantity/{id}', [AdminController::class, 'updatequantity'])->name('admin.updatequantity');
 });
 
 Route::middleware('auth')->group(function () {

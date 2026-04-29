@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Product;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -178,5 +179,56 @@ class AdminController extends Controller
         $product->save();
 
         return redirect()->back()->with('updated_message', 'Product updated successfully');
+    }
+
+    public function order()
+    {
+        $orders = Order::all();
+        $products = Product::all();
+        return view('admin.order', compact('products', 'orders'));
+    }
+
+    public function postorder($id)
+    {
+        $product = Product::findOrFail($id);
+        $quantity = 1;
+
+        $order = Order::where('product_id', $product->id)->first();
+        if ($order) {
+            $order->product_quantity += $quantity;
+        } else {
+            $order = new Order();
+            $order->product_id = $product->id;
+            $order->product_name = $product->product_name;
+            $order->product_quantity = $product->product_quantity;
+            $order->product_price = $product->product_price;
+        }
+        $order->save();
+        $product->product_quantity -= 1;
+        $product->save();
+        return redirect()->back();
+    }
+
+    public function updatequantity(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        $product = Product::findOrFail($order->product_id);
+
+        $newQty = $request->input('product_quantity');
+        $oldQty = $order->product_quantity;
+
+        $difference = $oldQty - $newQty;
+
+        $order->product_quantity = $newQty;
+
+        $order->save();
+
+        if ($difference > 0) {
+            $product->product_quantity -= $difference;
+        } else if ($difference < 0) {
+            $product->product_quantity += abs($difference);
+        }
+
+        return redirect()->back();
     }
 }
